@@ -77,12 +77,27 @@
         var lineHeight = this.lineHeight();
         this.drawActorName(actor, x, y + lineHeight * 0, width);
         this.drawActorLevel(actor, x, y + lineHeight * 1, width);
-        this.drawActorClass(actor, x, bottom - lineHeight * 4, width);
+        this.drawEquipments(actor, x, bottom - lineHeight * 4, width);
         this.drawActorHp(actor, x, bottom - lineHeight * 3, width);
         this.drawActorMp(actor, x, bottom - lineHeight * 2, width);
         this.drawActorIcons(actor, x, bottom - lineHeight * 1, width);
     };
-
+    
+    Window_MenuStatus.prototype.drawEquipments = function(actor,x,y,width) {
+    	width = width || 168;
+    	this.changeTextColor(this.hpColor(actor));
+    	this.drawActorTitleName(actor.equips()[4], x,y,width);
+    };
+    
+    Window_MenuStatus.prototype.drawActorTitleName = function(item, x, y, width) {
+    width = width || 168
+    if (item) {
+        this.resetTextColor();
+        this.drawText(item.name, x, y, width);
+    }
+};
+    
+    
     var _Window_MenuActor_initialize = Window_MenuActor.prototype.initialize;
     Window_MenuActor.prototype.initialize = function() {
         _Window_MenuActor_initialize.call(this);
